@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3.4.38/dist/vue.esm-browser.js",
+        "vue/server-renderer": "https://cdn.jsdelivr.net/npm/@vue/server-renderer@3.4.38/dist/server-renderer.esm-browser.js"
+      },
+      "scopes": {}
+    }
+  </script>
+  <style>
+    body {
+      background: rgb(255, 185, 93);
+    }
+    span {
+      color: white;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+  <title>VUE BASIQUE : Liaisons d'attributs</title>
+</head>
+<body>
+  <div id="app">
+
+    <!-- v-bind ou ':attribut' pour afficher le title lorsque curseur sur élément -->
+    <p><span v-bind:title="message">Passez votre souris sur moi pendant quelques secondes pour voir mon titre lié de manière dynamique !</span></p>
+
+    <!-- on définit l'attribut class selon la ref de la const isRed puis on change sa couleur au clique par la fonction toggleRed qui switch l'affichage de la class  -->
+    <p :class="{ red: isRed }" @click="toggleRed">Ceci devrait être rouge... mais cliquez sur moi pour le changer.</p>
+
+    <!-- on définit l'attribut style par la propiété css color qui renvoie vers la const color = style="color: green;" puis on change la couleur au clique par la fonction toggleGreenBlue qui fait appel à l'opérateur conditionnel (ternaire) pour switcher d'une couleur à l'autre -->
+    <p :style="{ color }" @click="toggleGreenBlue">Cela doit être vert et alterner entre le vert et le bleu lorsque l'on clique dessus.</p>
+
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+
+    createApp({
+
+      setup() {
+        const message = ref('Hello Vue!')
+        const isRed = ref(true)
+        const color = ref('green')
+
+        function toggleRed() {
+          isRed.value = !isRed.value
+          console.log('toggleRed/Black');
+        }
+        function toggleGreenBlue() {
+          console.log('toggleGreen/Blue');
+          color.value = color.value === 'green' ? 'blue' : 'green'
+        }
+
+        return {
+          message,
+          isRed,
+          toggleRed,
+          color,
+          toggleGreenBlue
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
