@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VUE BASIQUE : Conditions et boucles</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3.4.38/dist/vue.esm-browser.js",
+        "vue/server-renderer": "https://cdn.jsdelivr.net/npm/@vue/server-renderer@3.4.38/dist/server-renderer.esm-browser.js"
+      },
+      "scopes": {}
+    }
+  </script>
+</head>
+<body>
+  
+  <div id="app">
+    <button @click="show = !show">AFFICHER / CACHER la liste</button>
+    <button @click="list.push(list.length + 1)">AJOUTER UN ITEM A LA FIN</button>
+    <button @click="list.pop()">RETIRER UN ITEM A LA FIN</button>
+    <button @click="list.reverse()">INVERSER LA LISTE</button>
+    <ul v-if="show && list.length">
+      <!-- on map la liste d'item créer sous forme de tableau depuis la const -->
+      <li v-for="item of list">{{ item }}</li>
+    </ul>
+    <p v-else-if="list.length">La liste n'est pas vide mais cachée.</p>
+    <p v-else>La liste est vide.</p>
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+
+    createApp({
+      setup() {
+        const list = ref([1, 2, 3])
+        const show = ref(true)
+        
+        return {
+          list,
+          show
+        }
+      }
+
+      
+    }).mount('#app')
+  </script>
+</body>
+</html>
