@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>VueJS : Basique : Hello World</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { createApp } from 'vue'
+    import Mycomponent from './my-component.js'
+
+    createApp(Mycomponent).mount('#app')
+  </script>
+</body>
+</html>
