@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VUE BASIQUE : Gestion des entrées de l'utilisateur</title>
+  <style>
+    button, a {
+      display: block;
+      margin-bottom: 1em;
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3.4.38/dist/vue.esm-browser.js",
+        "vue/server-renderer": "https://cdn.jsdelivr.net/npm/@vue/server-renderer@3.4.38/dist/server-renderer.esm-browser.js"
+      },
+      "scopes": {}
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ message }}</h1>
+    <button @click="reverseMessage">REVERSE</button>
+    <button @click="message += '@'">ADD '@'</button>
+    <button @click.prevent="notify">AFFICHE UNE ALERT SANS RECHARGER LA PAGE</button>
+  </div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+
+    createApp({
+      setup() {
+        const message = ref('hello Vue!')
+
+        function reverseMessage() {
+          message.value = message.value.split('').reverse().join('')
+        }
+        function notify() {
+          console.log('click');
+          alert('Affiche cette alerte sans recharger la page')
+          
+        }
+
+        return {
+          message,
+          reverseMessage,
+          notify
+        }
+      }
+      
+    }).mount('#app')
+  </script>
+</body>
+</html>
