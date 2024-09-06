@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VUE BASIQUE : Composant basique</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3.4.38/dist/vue.esm-browser.js",
+        "vue/server-renderer": "https://cdn.jsdelivr.net/npm/@vue/server-renderer@3.4.38/dist/server-renderer.esm-browser.js"
+      },
+      "scopes": {}
+    }
+  </script>
+</head>
+<body>
+
+  <div id="app">
+    <ol>
+      <todo-item
+        v-for="item in groceryList"
+        v-bind:todo="item"
+        key="item.id"
+      ></todo-item>
+    </ol>
+  </div>
+  
+  <script type="module">
+    import { createApp, ref } from 'vue'
+    import TodoItem from './TodoItem.js'
+
+    createApp({
+
+      components: {
+        TodoItem
+      },
+
+      setup() {
+        const groceryList = ref([
+          {
+            id: 0,
+            text: 'Légumes'
+          }, {
+            id: 1,
+            text: 'Fromage'
+          }, {
+            id: 2,
+            text: 'Toute autre chose comestible pour les humains'
+          }
+        ])
+
+        return {
+          groceryList
+        }
+      }
+
+    }).mount('#app')
+  </script>
+</body>
+</html>
